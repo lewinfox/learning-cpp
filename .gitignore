@@ -1,0 +1,7 @@
+# Ignore build and lib directories
+build
+lib/*
+
+# No executables
+bin/*
+
