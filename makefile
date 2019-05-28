@@ -13,14 +13,17 @@ CFLAGS := -g # -Wall
 # LIB := -pthread -lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt  # Libraries to include
 INC := -I include  # Include dir
 
+# The final binary depends on the object files
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
+# The object files depend on the source files
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
+# Running `make clean` runs this to tidy things up
 clean:
 	@echo " Cleaning...";
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
@@ -33,4 +36,8 @@ tester:
 ticket:
 	$(CC) $(CFLAGS) spikes/ticket.cpp $(INC) $(LIB) -o bin/ticket
 
+# .PHONY means that "clean" is not a compilation target but a command.
+# Usually `make clean` means "check if the file `clean` is up to date and
+# rebuild it using this recipe if it isn't. Make will consider all .PHONY
+# targets to be out of date so this code will always be executed.
 .PHONY: clean
