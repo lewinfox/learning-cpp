@@ -20,7 +20,7 @@ INC := -I include  # Include dir
 # The final binary depends on the object files
 $(TARGET): $(OBJECTS)
 > @echo " Linking..."
-> mkdir -p $(BINDIR)
+> @mkdir -p $(BINDIR)
 > @echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 # The object files depend on the source files
