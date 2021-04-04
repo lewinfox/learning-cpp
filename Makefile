@@ -42,7 +42,8 @@ ticket:
 > $(CC) $(CFLAGS) spikes/ticket.cpp $(INC) $(LIB) -o bin/ticket
 
 # Run
-run:
+# Similar to Rust's `cargo run` - rebuilds the binary and runs it.
+run: $(TARGET)
 > @echo " ./$(TARGET)"; ./$(TARGET)
 
 # .PHONY means that "clean" is not a compilation target but a command.
