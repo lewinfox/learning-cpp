@@ -3,8 +3,9 @@
 CC := g++ # This is the main compiler
 # CC := clang --analyze # and comment out the linker last line for sanity
 SRCDIR := src
+BINDIR := bin
 BUILDDIR := build
-TARGET := bin/runner
+TARGET := $(BINDIR)/runner
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -16,6 +17,7 @@ INC := -I include  # Include dir
 # The final binary depends on the object files
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
+	mkdir -p $(BINDIR)
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
 # The object files depend on the source files
